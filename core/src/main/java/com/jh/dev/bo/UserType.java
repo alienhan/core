@@ -9,23 +9,29 @@
 -------------------------------------------------------------------------*/
 package com.jh.dev.bo;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 
-public class UserType {
+@Entity
+@Table(name = "user_type_tb")
+public class UserType implements Serializable {
 	/**
 	 * 用户类型主键
 	 */
-	private int typeId;
+	private Integer typeId;
 	/**
 	 * 用户名字
 	 */
@@ -46,14 +52,14 @@ public class UserType {
 	private Set<Menu> menuSet;
 
 	@Id
-	@GeneratedValue(generator = "uuid")
+	@GeneratedValue(generator = "uuid", strategy=GenerationType.AUTO)
 	@GenericGenerator(name = "uuid", strategy = "uuid")
 	@Column(name = "TYPE_ID", unique = true, nullable = false, insertable = true, updatable = true)
-	public int getTypeId() {
+	public Integer getTypeId() {
 		return typeId;
 	}
 
-	public void setTypeId(int typeId) {
+	public void setTypeId(Integer typeId) {
 		this.typeId = typeId;
 	}
 

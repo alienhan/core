@@ -46,6 +46,8 @@
 			value="org.springframework.web.servlet.view.JstlView" /><!-- 默认，可以不配 -->
 	</bean>
 
-	<mvc:resources mapping="/js/**" location="/js/" />
+	<mvc:resources mapping="/static/js/**" location="/static/js/" />
+	<mvc:resources mapping="/static/css/**" location="/static/css/" />
+	<mvc:resources mapping="/static/jquery-ui/**" location="/static/jquery-ui/" />
 
 </beans>

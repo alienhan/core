@@ -14,15 +14,20 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 
-public class Module implements Serializable{
+@Entity
+@Table(name = "module_tb")
+public class Module implements Serializable {
 	/**
 	 * 
 	 */
@@ -30,7 +35,7 @@ public class Module implements Serializable{
 	/**
 	 * 模块主键
 	 */
-	private int moduleId;
+	private Integer moduleId;
 	/**
 	 * 模块名字
 	 */
@@ -38,24 +43,23 @@ public class Module implements Serializable{
 	/**
 	 * 模块标签
 	 */
-	private int moduleTag;
+	private Integer moduleTag;
 	/**
 	 * 菜单主键
 	 */
 	private Set<Menu> menuSet;
 
 	@Id
-	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(name = "uuid", strategy = "uuid")
-	@Column(name = "MENU_ID", unique = true, nullable = false, insertable = true, updatable = true)
-	public int getModuleId() {
+	@GeneratedValue
+	@Column(name = "MODULE_ID", unique = true, nullable = false, insertable = true, updatable = true)
+	public Integer getModuleId() {
 		return moduleId;
 	}
 
-	public void setModuleId(int moduleId) {
+	public void setModuleId(Integer moduleId) {
 		this.moduleId = moduleId;
 	}
-	
+
 	@Column(name = "MODULE_NAME")
 	public String getModuleName() {
 		return moduleName;
@@ -66,16 +70,16 @@ public class Module implements Serializable{
 	}
 
 	@Column(name = "MODULE_TAG")
-	public int getModuleTag() {
+	public Integer getModuleTag() {
 		return moduleTag;
 	}
 
-	public void setModuleTag(int moduleTag) {
+	public void setModuleTag(Integer moduleTag) {
 		this.moduleTag = moduleTag;
 	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "module")
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
+	@Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
 	public Set<Menu> getMenuSet() {
 		return menuSet;
 	}

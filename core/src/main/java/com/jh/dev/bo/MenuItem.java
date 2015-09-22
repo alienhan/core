@@ -9,20 +9,31 @@
 -------------------------------------------------------------------------*/
 package com.jh.dev.bo;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-public class MenuItem {
+@Entity
+@Table(name = "menu_item_tb")
+public class MenuItem implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8795370729204084832L;
 	/**
 	 * 子菜单主键
 	 */
-	private int itemId;
+	private Integer itemId;
 	/**
 	 * 子菜单名字
 	 */
@@ -67,16 +78,16 @@ public class MenuItem {
 	 * 子菜单描述
 	 */
 	private String itemDesc;
-	
+
 	@Id
-	@GeneratedValue(generator = "uuid")
+	@GeneratedValue(generator = "uuid", strategy = GenerationType.AUTO)
 	@GenericGenerator(name = "uuid", strategy = "uuid")
 	@Column(name = "ITEM_ID", unique = true, nullable = false, insertable = true, updatable = true)
-	public int getItemId() {
+	public Integer getItemId() {
 		return itemId;
 	}
 
-	public void setItemId(int itemId) {
+	public void setItemId(Integer itemId) {
 		this.itemId = itemId;
 	}
 
@@ -162,7 +173,7 @@ public class MenuItem {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "MENU_ID", referencedColumnName = "TYPE_ID", insertable = false, updatable = false)
+	@JoinColumn(name = "MENU_ID", referencedColumnName = "MENU_ID", insertable = false, updatable = false)
 	public Menu getMenu() {
 		return menu;
 	}

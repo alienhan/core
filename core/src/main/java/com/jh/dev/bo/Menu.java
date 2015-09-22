@@ -17,6 +17,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -36,7 +37,7 @@ public class Menu implements Serializable {
 	/**
 	 * 菜单主键
 	 */
-	private int menuId;
+	private Integer menuId;
 	/**
 	 * 菜单名字
 	 */
@@ -81,14 +82,13 @@ public class Menu implements Serializable {
 	private Set<MenuItem> menuItemSet;
 
 	@Id
-	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(name = "uuid", strategy = "uuid")
+	@GeneratedValue
 	@Column(name = "MENU_ID", unique = true, nullable = false, insertable = true, updatable = true)
-	public int getMenuId() {
+	public Integer getMenuId() {
 		return menuId;
 	}
 
-	public void setMenuId(int menuId) {
+	public void setMenuId(Integer menuId) {
 		this.menuId = menuId;
 	}
 

@@ -12,14 +12,19 @@ package com.jh.dev.bo;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+@Entity
+@Table(name = "user_tb")
 public class User implements Serializable {
 	/**
 	 * 
@@ -28,7 +33,7 @@ public class User implements Serializable {
 	/**
 	 * 用户主键
 	 */
-	private int userId;
+	private Integer userId;
 	/**
 	 * 用户名字
 	 */
@@ -67,14 +72,14 @@ public class User implements Serializable {
 	private UserType userType;
 
 	@Id
-	@GeneratedValue(generator = "uuid")
+	@GeneratedValue(generator = "uuid", strategy=GenerationType.AUTO)
 	@GenericGenerator(name = "uuid", strategy = "uuid")
 	@Column(name = "USER_ID", unique = true, nullable = false, insertable = true, updatable = true)
-	public int getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 

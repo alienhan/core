@@ -9,6 +9,56 @@
 -------------------------------------------------------------------------*/
 package com.jh.core.dao;
 
-public class BaseDao {
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
-}
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class BaseDao {
+	@PersistenceContext
+	protected EntityManager em;
+	
+	/** 
+	 * 根据实体类型和主键获取实体对象
+	 *
+	 * @Title: get 
+	 * @Author: jianghan
+	 * @param entityClass
+	 * @param id
+	 * @return 获取的实体类
+	 *    
+	 */
+	protected <T> T get(Class<T> entityClass ,Object id){
+		return em.find(entityClass, id);
+	}
+	
+	/** 
+	 * 保存实体对象
+	 *
+	 * @Title: save 
+	 * @Author: jianghan
+	 * @param entity
+	 *    
+	 */
+	protected <T> void save(T entity){
+		 em.persist(entity);
+	}
+	
+	/** 
+	 * 更新实体对象
+	 *
+	 * @Title: update 
+	 * @Author: jianghan
+	 * @param entity
+	 * @return
+	 *    
+	 */
+	protected <T> T update(T entity){
+		return em.merge(entity);
+	}
+	
+	protected <T> void delete(T entity){
+		em.remove(entity);
+	}
+ }

@@ -8,13 +8,16 @@
 	<definition name="base.definition" template="/WEB-INF/page/common/layout_base.jsp">
 		<put-attribute name="title" value="" />
 		<put-attribute name="head" value="/WEB-INF/page/common/head.jsp" />
-		<put-attribute name="main" value="" />
+		<put-attribute name="header" value="/WEB-INF/page/common/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/page/common/menu.jsp" />
+		<put-attribute name="content" value="" />
+		<put-attribute name="footer" value="/WEB-INF/page/common/footer.jsp" />
 	</definition>
 	
-	<!-- main -->
-	<definition name="content" extends="base.definition">
+	<!-- menu -->
+	<definition name="menu/center" extends="base.definition">
 		<put-attribute name="title" value="主页" />
-		<put-attribute name="main" value="/WEB-INF/page/common/content.jsp" />
+		<put-attribute name="content" value="/WEB-INF/page/menu/menu_center.jsp" />
 	</definition>
 
 </tiles-definitions>      

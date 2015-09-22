@@ -2,8 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-<div class="base_content">
-	<div>
-		content	
-	</div>
+<div class="menu_manager_header">
+	header
+</div>
+<div class="menu_manager_content">
+	content
 </div>

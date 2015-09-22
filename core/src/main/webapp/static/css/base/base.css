@@ -1,0 +1,37 @@
+@CHARSET "UTF-8";
+
+/* base布局 */
+.base_header {
+	height: 50px;
+}
+
+.base_main {
+	border: 1px solid;
+	margin: 0 auto;
+	width: 90%;
+	padding: 0px;
+	min-height: 500px;
+}
+
+.base_main .base_menu {
+	border: 1px solid;
+	float: left;
+	width: 25%;
+	margin: 0px;
+}
+
+.base_main .base_content {
+	border: 1px solid;
+	float: right;
+	width: 74%;
+	margin: 0px;
+}
+
+.base_footer {
+	height: 50px;
+}
+
+/* 全局设置 */
+ul li {
+	list-style-type: none;/* 去除点 */
+}

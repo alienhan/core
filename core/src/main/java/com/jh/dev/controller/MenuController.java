@@ -9,6 +9,78 @@
 -------------------------------------------------------------------------*/
 package com.jh.dev.controller;
 
-public class MenuController {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jh.core.util.Condition;
+import com.jh.dev.bo.Menu;
+import com.jh.dev.bo.Module;
+import com.jh.dev.bo.UserType;
+import com.jh.dev.service.MenuService;
+
+@Controller
+public class MenuController {
+	@Autowired
+	private MenuService menuService;
+
+	@RequestMapping("menu/center")
+	public String menu_center(Model model) {
+		return "menu/center";
+	}
+
+	/** 
+	 * 更新主菜单
+	 *
+	 * @Title: update_menu 
+	 * @Author: jianghan
+	 * @param menu
+	 * @param model
+	 * @return
+	 *    
+	 */
+	@RequestMapping("/menu/update_menu")
+	public String update_menu(Menu menu, Model model) {
+		menuService.update(menu);
+		return "menu/center";
+	}
+
+	/** 
+	 * 保存主菜单
+	 *
+	 * @Title: save_menu 
+	 * @Author: jianghan
+	 * @param menu
+	 * @param model
+	 * @return
+	 *    
+	 */
+	@RequestMapping("menu/save_menu")
+	public String save_menu(Menu menu, Model model) {
+		menu.setMenuId(null);
+		UserType userType = new UserType();
+		Module module = new Module();
+		menu.setModule(module);
+		menu.setUserType(userType);
+		menuService.save(menu);
+		return "menu/center";
+	}
+
+	/**
+	 * 保存菜单所属模型
+	 * 
+	 * @Title: save_module
+	 * @Author: jianghan
+	 * @param module
+	 * @param model
+	 * @return
+	 * 
+	 */
+	@RequestMapping("menu/save_module")
+	public String save_module(Module module, Model model) {
+
+		menuService.saveModule(module);
+		return "menu/center";
+	}
 }
