@@ -4,7 +4,9 @@
 
 <link type="text/css" rel="stylesheet" href="/core/static/css/base/base.css" />
 <link type="text/css" rel="stylesheet" href="/core/static/jquery-ui/jquery-ui.css" />
+<link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
 
-<script type="text/javascript" src="/core/static/js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="/core/static/jquery-ui/external/jquery/jquery.js"></script>
 <script type="text/javascript" src="/core/static/jquery-ui/jquery-ui.js"></script>
+
 

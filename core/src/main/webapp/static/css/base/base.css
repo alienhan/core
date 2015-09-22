@@ -2,13 +2,13 @@
 
 /* base布局 */
 .base_header {
-	height: 50px;
+	height: 80px;
 }
 
 .base_main {
 	border: 1px solid;
 	margin: 0 auto;
-	width: 90%;
+	width: 85%;
 	padding: 0px;
 	min-height: 500px;
 }
@@ -16,15 +16,18 @@
 .base_main .base_menu {
 	border: 1px solid;
 	float: left;
-	width: 25%;
+	width: 15%;
 	margin: 0px;
+	padding: 0px;
+	height: 450px;
 }
 
 .base_main .base_content {
 	border: 1px solid;
 	float: right;
-	width: 74%;
+	width: 84%;
 	margin: 0px;
+	min-height: 450px;
 }
 
 .base_footer {
@@ -33,5 +36,5 @@
 
 /* 全局设置 */
 ul li {
-	list-style-type: none;/* 去除点 */
+	list-style-type: none; /* 去除点 */
 }
