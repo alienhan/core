@@ -16,8 +16,14 @@
 	
 	<!-- menu -->
 	<definition name="menu/center" extends="base.definition">
-		<put-attribute name="title" value="主页" />
+		<put-attribute name="title" value="菜单管理" />
 		<put-attribute name="content" value="/WEB-INF/page/menu/menu_center.jsp" />
+	</definition>
+	
+	<!-- module -->
+	<definition name="module/center" extends="base.definition">
+		<put-attribute name="title" value="菜单模型管理" />
+		<put-attribute name="content" value="/WEB-INF/page/menu/module_center.jsp" />
 	</definition>
 
 </tiles-definitions>      

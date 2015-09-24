@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	isELIgnored="false" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <style>
 #base_accordion {
 	padding: 0px;
-	margin: 0px;
-	width: 100%;
+	margin: 0 auto;
+	width: 95%;
 	height: 600px;
 	font-size: 15px;
 }
@@ -30,25 +34,12 @@
 }
 </style>
 
-<script>
-	$(function() {
-		$("#base_accordion").accordion({
-			collapsible : true
-		});
-		
-		$(".base_menu_menu").menu();
-		$(".base_menu_user").menu();
-		$(".base_menu_others").menu();
-		
-	});
-</script>
-
-
 <div id="base_accordion">
 	<h4>菜单管理</h4>
 	<ul id="base_menu" class="base_menu_menu">
 		<li><span>菜单管理</span></li>
 		<li><span>菜单权限管理</span></li>
+		<li><span><a href="/core/module/list_module">菜单模型管理</a></span></li>
 	</ul>
 	<h4>用户管理</h4>
 	<ul id="base_menu" class="base_menu_user">

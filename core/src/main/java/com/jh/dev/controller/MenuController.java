@@ -25,36 +25,15 @@ public class MenuController {
 	@Autowired
 	private MenuService menuService;
 
-	@RequestMapping("menu/center")
-	public String menu_center(Model model) {
-		return "menu/center";
-	}
-
-	/** 
-	 * 更新主菜单
-	 *
-	 * @Title: update_menu 
-	 * @Author: jianghan
-	 * @param menu
-	 * @param model
-	 * @return
-	 *    
-	 */
-	@RequestMapping("/menu/update_menu")
-	public String update_menu(Menu menu, Model model) {
-		menuService.update(menu);
-		return "menu/center";
-	}
-
-	/** 
+	/**
 	 * 保存主菜单
-	 *
-	 * @Title: save_menu 
+	 * 
+	 * @Title: save_menu
 	 * @Author: jianghan
 	 * @param menu
 	 * @param model
 	 * @return
-	 *    
+	 * 
 	 */
 	@RequestMapping("menu/save_menu")
 	public String save_menu(Menu menu, Model model) {
@@ -63,24 +42,29 @@ public class MenuController {
 		Module module = new Module();
 		menu.setModule(module);
 		menu.setUserType(userType);
-		menuService.save(menu);
+		menuService.saveMenu(menu);
 		return "menu/center";
 	}
 
 	/**
-	 * 保存菜单所属模型
+	 * 更新主菜单
 	 * 
-	 * @Title: save_module
+	 * @Title: update_menu
 	 * @Author: jianghan
-	 * @param module
+	 * @param menu
 	 * @param model
 	 * @return
 	 * 
 	 */
-	@RequestMapping("menu/save_module")
-	public String save_module(Module module, Model model) {
-
-		menuService.saveModule(module);
+	@RequestMapping("/menu/update_menu")
+	public String update_menu(Menu menu, Model model) {
+		menuService.updateMenu(menu);
 		return "menu/center";
 	}
+
+	@RequestMapping("menu/center")
+	public String menu_center(Model model) {
+		return "menu/center";
+	}
+
 }

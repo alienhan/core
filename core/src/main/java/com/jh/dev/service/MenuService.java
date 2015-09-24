@@ -17,22 +17,20 @@ import com.jh.core.util.Condition;
 import com.jh.dev.bo.Menu;
 import com.jh.dev.bo.Module;
 import com.jh.dev.dao.MenuDao;
+import com.jh.dev.dao.ModuleDao;
 
 @Transactional
 @Service
 public class MenuService {
 	@Autowired
 	private MenuDao menuDao;
-	
-	public Condition<Menu> update(Menu menu){
-		return menuDao.update(menu);
+
+	public void saveMenu(Menu menu) {
+		menuDao.saveMenu(menu);
 	}
-	
-	public Condition<Menu> save(Menu menu){
-		return menuDao.save(menu);
+
+	public void updateMenu(Menu menu) {
+		menuDao.updateMenu(menu);
 	}
-	
-	public Condition<Module> saveModule(Module module){
-		return menuDao.saveModule(module);
-	}
+
 }

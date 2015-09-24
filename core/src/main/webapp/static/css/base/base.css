@@ -1,40 +1,122 @@
 @CHARSET "UTF-8";
 
+/* 全局设置 */
+body{
+	background: url("/core/static/image/bg.jpg");
+}
+
+a {
+	text-decoration: none
+}
+
+ul li {
+	list-style-type: none; /* 去除点 */
+}
+/* end 全局设置 */
+
 /* base布局 */
 .base_header {
-	height: 80px;
+	height: 140px;
+	width: 1004px;
+	margin: 0 auto;
+}
+
+.base_header_2 {
+	background-color: #EBF0F2;
+	height: 20px;
+	bottom: 0px;
 }
 
 .base_main {
-	border: 1px solid;
+	border: 0px solid;
 	margin: 0 auto;
-	width: 85%;
 	padding: 0px;
 	min-height: 500px;
+	width: 1004px;
 }
 
 .base_main .base_menu {
-	border: 1px solid;
+	border: 0px solid;
+	background-color: #D2E9FB;
 	float: left;
-	width: 15%;
+	width: 18%;
 	margin: 0px;
 	padding: 0px;
 	height: 450px;
+	float: left;
 }
 
 .base_main .base_content {
 	border: 1px solid;
 	float: right;
-	width: 84%;
+	width: 80%;
 	margin: 0px;
 	min-height: 450px;
 }
 
 .base_footer {
-	height: 50px;
+	height: 40px;
+	width: 1004px;
+}
+/* end base */
+
+/* table */
+.base_table_parent {
+	font-size: 12px;
 }
 
-/* 全局设置 */
-ul li {
-	list-style-type: none; /* 去除点 */
+.base_table_header {
+	margin: 0 auto;
+	width: 600px;
 }
+
+.base_table {
+	margin: 0 auto;
+	border: 1px solid;
+	width: 600px;
+}
+
+.evenrowcolor {
+	background-color:blue;
+}
+
+.oddrowcolor {
+	background-color:gray;
+}
+
+.base_table tr th {
+	border: 0px solid;
+	margin: 0 auto;
+	color: blue;
+}
+
+.base_table tr td {
+	height:20px;
+	text-align: center;
+}
+
+.base_table_footer {
+	margin: 0 auto;
+	width: 600px;
+	text-align: center;
+}
+/* end table */
+
+/* content header设置 */
+/* 
+base_manager_header
+base_manager_theme
+ */
+.bmh {
+	border: 1px solid;
+	height: 100px;
+}
+
+.bmh .bmt {
+	width: 150px;
+	margin: 0 auto;
+	margin-top: 10px;
+	font-size: 18px;
+	text-align: center;
+}
+/*end content header设置 */

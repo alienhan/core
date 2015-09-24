@@ -11,13 +11,13 @@
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 
-	<mvc:annotation-driven />
-
 	<context:component-scan base-package="com.jh"
 		use-default-filters="false">
 		<context:include-filter expression="org.springframework.stereotype.Controller"
 			type="annotation" />
 	</context:component-scan>
+
+	<mvc:annotation-driven />
 
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
@@ -38,6 +38,7 @@
 		</property>
 	</bean>
 
+	<!--  -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/page/" />
@@ -49,5 +50,6 @@
 	<mvc:resources mapping="/static/js/**" location="/static/js/" />
 	<mvc:resources mapping="/static/css/**" location="/static/css/" />
 	<mvc:resources mapping="/static/jquery-ui/**" location="/static/jquery-ui/" />
+	<mvc:resources mapping="/static/image/**" location="/static/image/" />
 
 </beans>

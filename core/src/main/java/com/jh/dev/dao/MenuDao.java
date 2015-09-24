@@ -28,7 +28,7 @@ import com.jh.dev.bo.Module;
 public class MenuDao extends BaseDao{
 
 	/** 
-	 * 保存或更新菜单
+	 * 更新菜单
 	 *
 	 * @Title: update 
 	 * @Author: jianghan
@@ -36,21 +36,23 @@ public class MenuDao extends BaseDao{
 	 * @return
 	 *    
 	 */
-	public Condition<Menu> update(Menu menu){
+	public void updateMenu(Menu menu){
 		Condition<Menu> conditionParam = new Condition<Menu>();
 		super.update(menu);
-		return conditionParam;
 	}
 	
-	public Condition<Menu> save(Menu menu){
+	/** 
+	 * 保存菜单
+	 *
+	 * @Title: save 
+	 * @Author: jianghan
+	 * @param menu
+	 * @return
+	 *    
+	 */
+	public void saveMenu(Menu menu){
 		Condition<Menu> conditionParam = new Condition<Menu>();
 		super.save(menu);
-		return conditionParam;
 	}
 	
-	public Condition<Module> saveModule(Module module){
-		Condition<Module> conditionParam = new Condition<Module>();
-		super.save(module);
-		return conditionParam;
-	}
 }
