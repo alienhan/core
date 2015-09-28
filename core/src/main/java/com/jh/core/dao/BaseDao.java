@@ -167,45 +167,66 @@ public class BaseDao extends BaseDaoSupport {
 	}
 
 	/**
-	 * 根据SQL语句分页查询，返回页对象
+	 * 根据SQL语句分页查询，返回条件对象
 	 * 
 	 * @Title: findBySQLWithPage
 	 * @Author: jianghan
-	 * @param ql
-	 *            查询语句
-	 * @param pageNo
-	 *            当前页码
-	 * @param pageSize
-	 *            每页记录数
+	 * @param condition
+	 *            查询条件
 	 * @param params
-	 *            参数（可选）
-	 * @return
+	 *            查询参数（可选）
+	 * @return 条件对象
 	 * 
 	 */
-	protected <T> Condition<T> findBySQLWithPage(String sql,
-			Condition<T> condition, Object... params) {
-		return super.findByQLWithPage(em, sql, condition, QL_NATIVE, params);
+	protected <T> Condition<T> findBySQLWithPage(Condition<T> condition,
+			Object... params) {
+		return super.findByQLWithPage(em, condition, QL_NATIVE, params);
 	}
 
 	/**
-	 * 
+	 * 根据SQL语句分页查询，返回条件对象
 	 * 
 	 * @Title: findByJPQLWithPage
 	 * @Author: jianghan
-	 * @param ql
-	 *            查询语句
-	 * @param pageNo
-	 *            当前页码
-	 * @param pageSize
-	 *            每页记录数
+	 * @param condition
+	 *            查询条件
 	 * @param params
-	 *            参数（可选）
+	 *            查询参数（可选）
+	 * @return 条件对象
+	 * 
+	 */
+	protected <T> Condition<T> findByJPQLWithPage(Condition<T> condition,
+			Object... params) {
+		return super.findByQLWithPage(em, condition, QL_JPA, params);
+	}
+
+	/**
+	 * 根据SQL语句（使用聚合函数count）获取记录数
+	 * 
+	 * @Title: countBySQL
+	 * @Author: jianghan
+	 * @param condition
+	 * @param params
 	 * @return
 	 * 
 	 */
-	protected <T> Condition<T> findByJPQLWithPage(String jpql,
-			Condition<T> condition, Object... params) {
-		return super.findByQLWithPage(em, jpql, condition, QL_JPA, params);
+	protected <T> int countBySQL(Condition<T> condition, Object... params) {
+		return super.countByQl(em, condition, QL_NATIVE, params);
 	}
 
+	/**
+	 * 根据JPQL语句（使用聚合函数count）获取记录数
+	 * 
+	 * @Title: countByJPQL
+	 * @Author: jianghan
+	 * @param condition
+	 *            查询条件
+	 * @param params
+	 *            查询参数（可选）
+	 * @return
+	 * 
+	 */
+	protected <T> int countByJPQL(Condition<T> condition, Object... params) {
+		return super.countByQl(em, condition, QL_JPA, params);
+	}
 }

@@ -13,13 +13,12 @@
 	<div class="bmt menu_manager_theme">菜单管理</div>
 	<div></div>
 </div>
-<div class="menu_manager_content">
-	<div class="base_table_parent">
-		<div class="base_table_header menu_table_header">
-			<button type="button" class="base_table_add menu_add">添&nbsp;&nbsp;加</button>
-			<button type="button" class="base_table_delete menu_delete">删&nbsp;&nbsp;除</button>
+<div class="muc">
+	<div class="btd">
+		<div class="bth menu_table_header">
+			<button type="button" class="bta menu_add">添&nbsp;&nbsp;加</button>
 		</div>
-		<table class="base_table menu_table">
+		<table class="bt menu_table">
 			<tr>
 				<th>菜单名字</th>
 				<th>菜单地址</th>
@@ -47,7 +46,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<div class="base_table_footer menu_table_footer">
+		<div class="btf menu_table_footer">
 			<a href="#" class="base_table_pre">上一页</a>
 			<a href="#" class="base_table_next">下一页</a>
 			<span>共:xx页</span>

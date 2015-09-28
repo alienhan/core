@@ -28,6 +28,8 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jh.core.util.Condition;
+import com.jh.core.util.Page;
 import com.jh.dev.bo.Menu;
 import com.jh.dev.bo.Module;
 import com.jh.dev.service.ModuleService;
@@ -86,12 +88,26 @@ public class ModuleServiceTest {
 		logger.info("module name: " + module.getModuleName());
 	}
 	
-	@Test
+	//@Test
 	public void testFindUniqueModuleByJPQL(){
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("moduleTag", 2);
 		Module module = moduleService.findUniqueModuleByJPQL(parameterMap);
 		logger.info("module name: " + module.getModuleName());
+	}
+	
+	@Test
+	public void testFindModuleByJPQLWithPage(){
+		Module module = new Module();
+		module.setModuleName("管理员模板");
+		Page page = new Page();
+		Condition<Module> condition = new Condition<Module>();
+		condition.setT(module);
+		condition.setPage(page);
+		Condition<Module> conditionParam = moduleService.findModuleByJPQLWithPage(condition);
+		for(Module m : conditionParam.getList()){
+			logger.info("moduleId: " + m.getModuleId() + " ModuleName: " + m.getModuleName());
+		}
 	}
 
 }

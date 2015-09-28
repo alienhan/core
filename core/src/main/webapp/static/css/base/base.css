@@ -1,7 +1,8 @@
 @CHARSET "UTF-8";
 
-/* 全局设置 */
-body{
+/* 全局设置
+----------------------------------*/
+body {
 	background: url("/core/static/image/bg.jpg");
 }
 
@@ -12,9 +13,9 @@ a {
 ul li {
 	list-style-type: none; /* 去除点 */
 }
-/* end 全局设置 */
 
-/* base布局 */
+/* base布局
+----------------------------------*/
 .base_header {
 	height: 140px;
 	width: 1004px;
@@ -58,65 +59,78 @@ ul li {
 	height: 40px;
 	width: 1004px;
 }
-/* end base */
 
-/* table */
-.base_table_parent {
+/* table
+----------------------------------*/
+/* base_table_div */
+.btd {
 	font-size: 12px;
 }
 
-.base_table_header {
+/* base_table_header */
+.bth {
 	margin: 0 auto;
 	width: 600px;
 }
 
-.base_table {
+/* base_table_add_div */
+.btad {
+	
+}
+
+/* base_table  */
+.bt {
 	margin: 0 auto;
 	border: 1px solid;
 	width: 600px;
 }
 
-.evenrowcolor {
-	background-color:blue;
+/* table 奇数行 */
+.bt_even {
+	background-color: #D2E9FB;
+}
+/* table 偶数行 */
+.bt_odd {
+	background-color: #bbf;
 }
 
-.oddrowcolor {
-	background-color:gray;
+/* 鼠标移动 到行的颜色*/
+.bt_hover
+{
+  background-color: #cccc00;
 }
 
-.base_table tr th {
+.bt tr th {
 	border: 0px solid;
 	margin: 0 auto;
 	color: blue;
 }
 
-.base_table tr td {
-	height:20px;
+.bt tr td {
+	height: 20px;
 	text-align: center;
 }
 
-.base_table_footer {
+/* base_table_footer */
+.btf {
 	margin: 0 auto;
 	width: 600px;
 	text-align: center;
 }
-/* end table */
 
-/* content header设置 */
-/* 
-base_manager_header
-base_manager_theme
- */
-.bmh {
-	border: 1px solid;
+/* content 设置 
+----------------------------------*/
+/* base_content_header */
+.bch {
+	border: 0px solid;
 	height: 100px;
 }
 
-.bmh .bmt {
+/*  base_content_theme */
+.bch .bct {
 	width: 150px;
 	margin: 0 auto;
 	margin-top: 10px;
 	font-size: 18px;
 	text-align: center;
 }
-/*end content header设置 */

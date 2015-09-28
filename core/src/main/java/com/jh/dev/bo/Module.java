@@ -78,7 +78,7 @@ public class Module implements Serializable {
 		this.moduleTag = moduleTag;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "module")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "module")
 	@Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
 	public Set<Menu> getMenuSet() {
 		return menuSet;

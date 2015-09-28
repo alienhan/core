@@ -10,6 +10,7 @@
 package com.jh.dev.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -71,7 +72,7 @@ public class ModuleDao extends BaseDao{
 	}
 	
 	/** 
-	 * 通过jpql获取单个对象
+	 * 获取单个对象 jpql
 	 *
 	 * @Title: findUniqueModuleByJPQL 
 	 * @Author: jianghan
@@ -80,19 +81,57 @@ public class ModuleDao extends BaseDao{
 	 *    
 	 */
 	public Module findUniqueModuleByJPQL(Map<String, Object> parameterMap){
-		StringBuffer jpql = new StringBuffer("select m from Module m where 1=1 and ");
+		StringBuffer jpql = new StringBuffer("select m from Module m where 1=1");
 		if(StringUtils.isNotBlank(parameterMap.get("moduleTag").toString())){
-			jpql.append(" m.moduleTag=:moduleTag");
+			jpql.append(" and m.moduleTag=:moduleTag");
 		}
 		
 		return super.findUniqueByJPQL(jpql.toString(), parameterMap);
 	}
 	
+	/** 
+	 * 查询 jpql
+	 *
+	 * @Title: findModuleByJPQL 
+	 * @Author: jianghan
+	 * @param module
+	 * @param params
+	 * @return
+	 *    
+	 */
+	public List<Module> findModuleByJPQL(Module module, Object... params){
+		StringBuffer jpql = new StringBuffer("select m from Module m where 1=1");
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		
+		if(StringUtils.isNotBlank(module.getModuleName())){
+			jpql.append(" and m.moduleName=:moduleName");
+			parameterMap.put("moduleName", module.getModuleName());
+		}
+		jpql.append(" order by m.moduleId desc");
+		
+		return super.findByJPQL(jpql.toString(), params);
+	}
+	
+	/** 
+	 * 分页查询 jpql
+	 *
+	 * @Title: findModuleByJPQLWithPage 
+	 * @Author: jianghan
+	 * @param condition
+	 * @return
+	 *    
+	 */
 	public Condition<Module> findModuleByJPQLWithPage(Condition<Module> condition){
 		StringBuffer jpql = new StringBuffer("select m from Module m where 1=1");
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		
+		if(StringUtils.isNotBlank(condition.getT().getModuleName())){
+			jpql.append(" and m.moduleName=:moduleName");
+			parameterMap.put("moduleName", condition.getT().getModuleName());
+		}
+		jpql.append(" order by m.moduleId asc");
 		
-		return super.findByJPQLWithPage(jpql.toString(), condition, parameterMap);
+		condition.setQl(jpql.toString());
+		return super.findByJPQLWithPage(condition, parameterMap);
 	}
 }

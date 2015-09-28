@@ -5,5 +5,16 @@ spring 添加log
  	这样log4j的配置文件里就可以用${myAppfuse.root}来表示刚刚设进去的系统变量：
  	log4j.appender.logfile.File=${myAppfuse.root}/logs/mylog.log
  	
- 	
+error: 406 
+spring 4.x 不支持 jackson 1.x 
+
+
+
+error:
+Required request body content is missing: org.springframework.web.method.HandlerMethod
+solution:
+不能同时出现两个@RequestBody
+
+error: ajax 400
+ajax提供的类型与实体类类型不同    类型错误 
 

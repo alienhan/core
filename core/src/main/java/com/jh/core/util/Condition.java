@@ -12,8 +12,7 @@ package com.jh.core.util;
 import java.util.List;
 
 /**
- * 查询，或返回条件
- * 泛型类
+ * 查询，或返回条件 泛型类
  * 
  * @ClassName: Condition
  * @author jh
@@ -27,9 +26,9 @@ public class Condition<T> {
 	private Page page;
 
 	private List<T> list;
-	private T[] t;
+	private T t;
 
-	private String jpql = null;
+	private String ql;
 
 	public boolean isStatus() {
 		return status;
@@ -55,20 +54,20 @@ public class Condition<T> {
 		this.list = list;
 	}
 
-	public T[] getT() {
+	public T getT() {
 		return t;
 	}
 
-	public void setT(T[] t) {
+	public void setT(T t) {
 		this.t = t;
 	}
 
-	public String getJpql() {
-		return jpql;
+	public String getQl() {
+		return ql;
 	}
 
-	public void setJpql(String jpql) {
-		this.jpql = jpql;
+	public void setQl(String ql) {
+		this.ql = ql;
 	}
 
 }

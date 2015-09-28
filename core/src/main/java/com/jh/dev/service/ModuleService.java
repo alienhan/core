@@ -9,6 +9,7 @@
 -------------------------------------------------------------------------*/
 package com.jh.dev.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,10 @@ public class ModuleService {
 	
 	public Module findUniqueModuleByJPQL(Map<String, Object> parameterMap){
 		return moduleDao.findUniqueModuleByJPQL(parameterMap);
+	}
+	
+	public List<Module> findModuleByJPQL(Module module, Object... params){
+		return moduleDao.findModuleByJPQL(module, params);
 	}
 	
 	public Condition<Module> findModuleByJPQLWithPage(Condition<Module> condition){

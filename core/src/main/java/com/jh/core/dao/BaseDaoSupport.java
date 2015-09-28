@@ -78,7 +78,7 @@ public class BaseDaoSupport {
 
 		if (params == null) {
 			// 无参数，直接生成适配的Query对象
-			
+
 			query = this.createAdaptor(em, ql, opt);
 		} else if (params.length == 1 && params[0] instanceof Map) {
 			// 集合类型参数(Map)，将命名参数统一转为位置参数
@@ -169,27 +169,40 @@ public class BaseDaoSupport {
 
 	/**
 	 * 根据QL语句分页查询，返回页对象
-	 * @param <T>
 	 * 
+	 * @Title: findByQLWithPage
+	 * @Author: jianghan
 	 * @param em
-	 * @param ql
 	 * @param condition
-	 * @param pn
-	 *            当前页码
-	 * @param ps
-	 *            每页记录数
+	 *            查询条件
+	 * @param opt
+	 *            查询类型
 	 * @param params
 	 *            参数（可选）
 	 * @return
+	 * 
 	 */
-	@SuppressWarnings({"unchecked" })
-	protected <T> Condition<T> findByQLWithPage(EntityManager em, String ql, Condition<T> condition, int opt, Object... params) {
-		
+	@SuppressWarnings({ "unchecked" })
+	protected <T> Condition<T> findByQLWithPage(EntityManager em,
+			Condition<T> condition, int opt, Object... params) {
+
 		Condition<T> conditionParam = new Condition<T>();
 		int pageNo = condition.getPage().getPageNo();
 		int pageSize = condition.getPage().getPageSize();
+		String ql = condition.getQl();
 		
-		if (StringUtils.isBlank(ql)) {
+		// 根据ql获取count语句
+        String countQL = "select count(*) ";
+        if (ql.toLowerCase().indexOf("order by") == -1) {
+            countQL += ql.substring(ql.toLowerCase().indexOf("from"));
+        } else {
+            countQL += ql.substring(ql.toLowerCase().indexOf("from"), ql.toLowerCase().indexOf("order by"));
+        }
+        condition.setQl(countQL);
+        int count = this.countByQl(em, condition, opt, params);
+
+        //查询语句为空
+		if (StringUtils.isBlank(condition.getQl())) {
 			Page page = Page.EMPTY_PAGE;
 			conditionParam.setPage(page);
 		}
@@ -209,13 +222,36 @@ public class BaseDaoSupport {
 			query.setFirstResult(firstResult);
 			// 设置查询结果的结束记录数
 			query.setMaxResults(pageSize);
-			
+
 			List<T> list = query.getResultList();
 			conditionParam.setList(list);
-			Page page = new Page(list.size(), pageNo, pageSize);
+			Page page = new Page(count, pageNo, pageSize);
 			conditionParam.setPage(page);
-			
+
 			return conditionParam;
+		} catch (HibernateException ex) {
+			throw new DaoException(ex);
+		}
+	}
+
+	/**
+	 * 根据QL语句（使用聚合函数count）获取记录数
+	 * 
+	 * @Title: countByQl
+	 * @Author: jianghan
+	 * @param condition 查询条件
+	 * @param em
+	 * @param opt 查询类型
+	 * @param params 查询参数（可选）
+	 * @return
+	 * 
+	 */
+	protected <T> int countByQl(EntityManager em, Condition<T> condition,
+			int opt, Object... params) {
+		try {
+			Query query = this.create(em, condition.getQl(), opt, params);
+			return Integer.parseInt(query.getSingleResult().toString());
+
 		} catch (HibernateException ex) {
 			throw new DaoException(ex);
 		}

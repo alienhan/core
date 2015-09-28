@@ -17,7 +17,30 @@
 			type="annotation" />
 	</context:component-scan>
 
+	<!-- 默认的注解映射的支持 -->
 	<mvc:annotation-driven />
+	<!-- 自定义注解映射的支持 -->
+	<!-- <bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="cacheSeconds" value="0" />
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>text/html;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+				支持Jackson
+				<bean
+					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+			</list>
+		</property>
+	</bean> -->
 
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
@@ -38,7 +61,7 @@
 		</property>
 	</bean>
 
-	<!--  -->
+	<!-- 监控配置 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/page/" />
@@ -47,6 +70,7 @@
 			value="org.springframework.web.servlet.view.JstlView" /><!-- 默认，可以不配 -->
 	</bean>
 
+	<!-- 静态文件 -->
 	<mvc:resources mapping="/static/js/**" location="/static/js/" />
 	<mvc:resources mapping="/static/css/**" location="/static/css/" />
 	<mvc:resources mapping="/static/jquery-ui/**" location="/static/jquery-ui/" />
