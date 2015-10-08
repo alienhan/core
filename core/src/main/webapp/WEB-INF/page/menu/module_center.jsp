@@ -8,62 +8,72 @@
 
 <script type="text/javascript">
 	//添加页面显示
-	$(document).ready(function() {
-
-		$(".bta").click(function() {
-			$(".module_add_div").dialog("open");
+	function showSave() {
+		$(".btad").dialog({
+			autoOpen : true,
+			buttons : {
+				"添加" : save,
+				"关闭" : function() {
+					dialog.dialog("close");
+				}
+			}
 		});
-	});
+	}
 
 	//添加
-	function saveModule() {
+	function save() {
 		var url = "/core/module/save_module";
-		var moduleName = $(".moduleName").val();
-		var moduleTag = $(".moduleTag").val();
+		var moduleName = $(".btad .moduleName").val();
+		var moduleTag = $(".btad .moduleTag").val();
 		var data = {
 			"moduleName" : moduleName,
 			"moduleTag" : moduleTag
 		};
 		ajaxSupport(url, data, function(result) {
-			alert("result: " + result.msg);
 			window.location.reload();
 		});
 	}
 
 	//删除页面显示
 	function showDelete(moduleId) {
-		$(".module_delete_div .moduleId").val(moduleId);
-		$(".module_delete_div").dialog("open");
+		$(".btdd .moduleId").val(moduleId);
+		$(".btdd").dialog("open");
 	}
 
 	//删除
-	function deleteModule(moduelId) {
+	function deleteBase() {
 		var url = "/core/module/delete_module";
-		var moduleId = $(".module_delete_div .moduleId").val();
+		var moduleId = $(".btdd .moduleId").val();
 		var data = {
 			"moduleId" : moduleId
 		};
 		ajaxSupport(url, data, function(result) {
-			alert("result: " + result.msg);
 			window.location.reload();
 		});
 	}
 
 	//更新页面显示
-	function showUpdate(moduleId, moduleName, moduleTag) {
-		$(".module_update_div .moduleId").val(moduleId);
-		$(".module_update_div .moduleName").val(moduleName);
-		$(".module_update_div .moduleTag").val(moduleTag);
-		$(".module_update_div").dialog("open");
+	function showUpdate(moduleId) {
+		var url = "/core/module/get_module";
+		var data = {
+			"moduleId" : moduleId
+		};
+		ajaxSupport(url, data, function(result) {
+			$(".btud .moduleId").val(result.module.moduleId);
+			$(".btud .moduleName").val(result.module.moduleName);
+			$(".btud .moduleTag").val(result.module.moduleTag);
+			$(".btud").dialog("open");
+
+		});
 
 	};
 
 	//更新
-	function updateModule() {
+	function update() {
 		var url = "/core/module/update_module";
-		var moduleId = $(".module_update_div .moduleId").val();
-		var moduleName = $(".module_update_div .moduleName").val();
-		var moduleTag = $(".module_update_div .moduleTag").val();
+		var moduleId = $(".btud .moduleId").val();
+		var moduleName = $(".btud .moduleName").val();
+		var moduleTag = $(".btud .moduleTag").val();
 
 		var data = {
 			"moduleId" : moduleId,
@@ -71,36 +81,35 @@
 			"moduleTag" : moduleTag
 		};
 		ajaxSupport(url, data, function(result) {
-			alert("result: " + result.msg);
 			window.location.reload();
 		});
 	}
 
 	//查询
-	function getModule(moduleId) {
+	function get(moduleId) {
 		var url = "/core/module/get_module";
 		var data = {
 			"moduleId" : moduleId
 		};
 		ajaxSupport(url, data, function(result) {
-			$(".module_get_div .moduleName").html(result.module.moduleName);
-			$(".module_get_div .moduleTag").html(result.module.moduleTag);
-			$(".module_get_div").dialog("open");
+			$(".btgd .moduleName").html(result.module.moduleName);
+			$(".btgd .moduleTag").html(result.module.moduleTag);
+			$(".btgd").dialog("open");
 		});
 	}
 </script>
 
 
-<div class="bch module_manager_header">
-	<div class="bct module_manager_theme">菜单模型管理</div>
+<div class="bch moh">
+	<div class="bct mot">菜单模型管理</div>
 	<div></div>
 </div>
 <div class="bc moc">
 	<div class="btd">
-		<div class="bth module_table_header">
-			<button type="button" class="bta module_add">添&nbsp;&nbsp;加</button>
+		<div class="bth moth">
+			<button type="button" class="bta moa" onclick="showSave()">添&nbsp;&nbsp;加</button>
 		</div>
-		<table class="bt module_table">
+		<table class="bt mot">
 			<tr>
 				<th>菜单模型id</th>
 				<th>菜单模型名字</th>
@@ -112,15 +121,15 @@
 					<td>${module.moduleId }</td>
 					<td>${module.moduleName}</td>
 					<td>${module.moduleTag}</td>
-					<td><a class="get" href="javascript:" onclick="getModule('${module.moduleId }')">详细</a>
-						<a class="update" href="javascript:"
-						onclick="showUpdate('${module.moduleId }', '${module.moduleName}', '${module.moduleTag}')">更新</a>
+					<td><a class="get" href="javascript:"
+						onclick="get('${module.moduleId }')">详细</a> <a class="update"
+						href="javascript:" onclick="showUpdate('${module.moduleId }')">更新</a>
 						<a class="delete" href="javascript:"
 						onclick="showDelete('${module.moduleId }')">删除</a></td>
 				</tr>
 			</c:forEach>
 		</table>
-		<div class="btf module_table_footer">
+		<div class="btf motf">
 			<a
 				href="/core/module/list_module?pageNo=${conditionParam.page.pageNo-1}"
 				class="">上一页</a> <a
@@ -133,21 +142,21 @@
 </div>
 
 <!-- add -->
-<div class="btad module_add_div">
+<div class="btad moad">
 	<input type="text" id="moduleName" class="moduleName" name="moduleName" />
 	<input type="text" id="moduleName" class="moduleTag" name="moduleTag" />
-	<input type="submit" value="添加" onclick="saveModule()" />
+	<input type="submit" value="添加" onclick="save()" />
 </div>
 
 <!-- delete -->
-<div class="btdd module_delete_div">
+<div class="btdd modd">
 	<p>确定删除？</p>
 	<input type="hidden" id="moduleId" class="moduleId" name="moduleId" />
-	<input type="submit" value="删除" onclick="deleteModule()" />
+	<input type="submit" value="删除" onclick="deleteBase()" />
 </div>
 
 <!-- update -->
-<div class="btud module_update_div">
+<div class="btud moud">
 	<input type="hidden" id="moduleId" class="moduleId" name="moduleId" />
 	<input type="text" id="moduleName" class="moduleName" name="moduleName" />
 	<input type="text" id="moduleName" class="moduleTag" name="moduleTag" />
@@ -155,7 +164,7 @@
 </div>
 
 <!-- get -->
-<div class="btgd module_get_div">
+<div class="btgd mogd">
 	<div class="moduleName"></div>
 	<div class="moduleTag"></div>
 </div>

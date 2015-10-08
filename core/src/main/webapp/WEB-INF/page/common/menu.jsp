@@ -7,12 +7,17 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <style>
+
+* {
+	font-family: Verdana, Geneva, sans-serif;
+}
+
 #base_accordion {
+	margin: 0px;
 	padding: 0px;
-	margin: 0 auto;
-	width: 95%;
-	height: 600px;
 	font-size: 15px;
+	color: #626262;
+	overflow-x: hidden;
 }
 
 #base_menu {
@@ -21,37 +26,71 @@
 	width: 99%;
 	min-height: 150px;
 	font-size: 15px;
+	overflow: hidden;
 }
 
-#base_menu li {
-	margin-top: 5px;
-	padding: 0,3px,0,3px;
+.base_nav {
+	margin: 0px;
+	padding: 0px;
+	overflow: visible;
 }
 
-#base_menu li span {
-	margin-left: 35px;
-	font-size: 15px;
+.base_nav dl {
+	margin: 0px;
+	padding: 0px;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.base_nav dl dt {
+	margin: 0px;
+	padding: 10px 0px 0px 30px;
+	height: 30px;
+	cursor: pointer;
+	background-size: 100%;
+	background: url(/core/static/image/menu/menu_dt.jpg) repeat;
+}
+
+.base_nav dl dd {
+	margin: 0px;
+	padding: 5px 0px 5px 30px;
+	height: 20px;
+	cursor: pointer;
 }
 </style>
 
-<div id="base_accordion">
-	<h4>菜单管理</h4>
-	<ul id="base_menu" class="base_menu_menu">
-		<li><span>菜单管理</span></li>
-		<li><span>菜单权限管理</span></li>
-		<li><span><a href="/core/module/list_module">菜单模型管理</a></span></li>
-	</ul>
-	<h4>用户管理</h4>
-	<ul id="base_menu" class="base_menu_user">
-		<li><span>用户添加</span></li>
-		<li><span>用户查询</span></li>
-		<li><span>用户删除</span></li>
-	</ul>
-	<h4>系统管理</h4>
-	<ul id="base_menu" class="base_menu_others">
-		<li><span>系统添加</span></li>
-		<li><span>系统查询</span></li>
-		<li><span>系统删除</span></li>
-	</ul>
+<script type="text/javascript">
+	$(function() {
+		$(".base_nav dd").hide();
+		$(".base_nav dt").click(function() {
+			$(this).parent().find('dd').removeClass("menu_chioce");
+			$(".menu_chioce").slideUp();
+			$(this).parent().find('dd').slideToggle();
+			//$(this).parent().find('dd').addClass("menu_chioce");
+		});
+	});
+</script>
 
+<div id="base_accordion">
+
+	<div id="base_nav" class="base_nav">
+		<dl>
+			<dt>
+				菜单管理<img src="/core/static/image/select_xl01.png">
+			</dt>
+			<dd>菜单管理</dd>
+			<dd>菜单权限管理</dd>
+			<dd>
+				<span><a href="/core/module/list_module">菜单模型管理</a></span>
+			</dd>
+		</dl>
+
+		<dl>
+			<dt>用户管理</dt>
+			<dd>
+				<span><a href="/core/userType/list_userType">用户类型管理</a></span>
+			</dd>
+			<dd>用户查询</dd>
+			<dd>用户删除</dd>
+		</dl>
+	</div>
 </div>
