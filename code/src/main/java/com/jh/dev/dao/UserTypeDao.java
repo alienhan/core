@@ -15,59 +15,122 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
+import com.jh.core.constants.Constants;
 import com.jh.core.dao.BaseDao;
 import com.jh.core.util.Condition;
+import com.jh.core.util.Page;
 import com.jh.dev.bo.UserType;
 
-/** 
+/**
  * 用户类型数据处理类
- *
- * @ClassName: UserTypeDao 
- * @author jh 
- * @date 2015-9-28 下午3:22:27 
- *  
+ * 
+ * @ClassName: UserTypeDao
+ * @author jh
+ * @date 2015-9-28 下午3:22:27
+ * 
  */
 @Repository
 public class UserTypeDao extends BaseDao {
-	public void save(UserType userType){
+	/**
+	 * 查询
+	 * 
+	 * @Title: save
+	 * @Author: jianghan
+	 * @param userType
+	 * 
+	 */
+	public void save(UserType userType) {
 		super.save(userType);
 	}
-	
-	public void delete(UserType userType){
+
+	/**
+	 * 删除
+	 * 
+	 * @Title: delete
+	 * @Author: jianghan
+	 * @param userType
+	 * 
+	 */
+	public void delete(UserType userType) {
 		super.delete(userType);
 	}
-	
-	public void update(UserType userType){
+
+	/**
+	 * 更新
+	 * 
+	 * @Title: update
+	 * @Author: jianghan
+	 * @param userType
+	 * 
+	 */
+	public void update(UserType userType) {
 		super.update(userType);
 	}
-	
-	public UserType get(int id){
+
+	/**
+	 * 查询单个对象
+	 * 
+	 * @Title: get
+	 * @Author: jianghan
+	 * @param id
+	 * @return
+	 * 
+	 */
+	public UserType get(int id) {
 		return super.get(UserType.class, id);
 	}
-	
-	/** 
-	 * 分页
-	 *
-	 * @Title: findByJPQLWithPage 
+
+	/**
+	 * 搜索提示
+	 * 
+	 * @Title: SearchReminder
 	 * @Author: jianghan
 	 * @param condition
 	 * @return
-	 *    
+	 * 
 	 */
-	public Condition<UserType> findByJPQLWithPage(Condition<UserType> condition){
-		StringBuffer jpql = new StringBuffer("select ut from UserType ut where 1=1");
+	public Condition<UserType> searchReminder(Condition<UserType> condition) {
+		StringBuffer jpql = new StringBuffer(
+				"select distinct ut.typeName ,ut.typeTag from UserType ut where 1=1");
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
-		
-		if(StringUtils.isNotBlank(condition.getT().getTypeName())){
-			jpql.append(" and ut.typeName=:typeName");
-			parameterMap.put("typeName", condition.getT().getTypeName());
+
+		if (StringUtils.isNotBlank(condition.getSearch())) {
+			jpql.append(" and ut.typeName like :typeName");
+			parameterMap.put("typeName", "%" + condition.getSearch() + "%");
+
 		}
-		if(condition.getT().getTypeTag() != 0){
-			jpql.append(" and ut.typeTag=:typeTag");
-			parameterMap.put("typeTag", condition.getT().getTypeTag());
+		jpql.append(" order by ut.typeId desc");
+		
+		condition.setQl(jpql.toString());
+		Page page = Page.EMPTY_PAGE;
+		condition.setPage(page);
+		condition.getPage().setPageNo(Constants.SEARCH_FIRST);
+		condition.getPage().setPageSize(Constants.SEARCH_MAX);
+		
+		return super.findByJPQLWithPage(condition, parameterMap);
+	}
+
+	/**
+	 * 分页
+	 * 
+	 * @Title: findByJPQLWithPage
+	 * @Author: jianghan
+	 * @param condition
+	 * @return
+	 * 
+	 */
+	public Condition<UserType> findByJPQLWithPage(Condition<UserType> condition) {
+		StringBuffer jpql = new StringBuffer(
+				"select ut from UserType ut where 1=1");
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+
+		if (StringUtils.isNotBlank(condition.getSearch())) {
+			jpql.append(" and ut.typeName like :typeName");
+			parameterMap.put("typeName", "%" + condition.getSearch() + "%");
+
 		}
 		jpql.append(" order by ut.typeId asc");
-		
+
 		condition.setQl(jpql.toString());
 		return super.findByJPQLWithPage(condition, parameterMap);
 	}

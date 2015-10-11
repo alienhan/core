@@ -30,6 +30,8 @@ public class Condition<T> {
 
 	private String ql;
 
+	private String search;
+
 	public boolean isStatus() {
 		return status;
 	}
@@ -68,6 +70,14 @@ public class Condition<T> {
 
 	public void setQl(String ql) {
 		this.ql = ql;
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
 	}
 
 }

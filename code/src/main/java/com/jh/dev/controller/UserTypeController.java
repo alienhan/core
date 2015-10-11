@@ -11,9 +11,11 @@ package com.jh.dev.controller;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -79,6 +81,24 @@ public class UserTypeController {
 		map.put("userType", userType2);
 		return map;
 	}
+	
+	/** 
+	 * 查询提示
+	 *
+	 * @Title: searchReminder 
+	 * @Author: jianghan
+	 * @param condition
+	 * @return
+	 *    
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/search_reminder")
+	public Map<String, Object> searchReminder(@RequestBody final Condition<UserType> condition){
+		Map<String, Object> map = new HashMap<String, Object>();
+		Condition<UserType> condition2 =userTypeService.searchReminder(condition);
+		map.put("search", condition2.getList());
+		return map;
+	}
 
 	/**
 	 * 分页查询
@@ -92,8 +112,12 @@ public class UserTypeController {
 	 * 
 	 */
 	@RequestMapping("/list_userType")
-	public String list_module(UserType userType, Page page, Model model) {
+	public String list_module(String search, UserType userType, Page page, Model model) {
 		Condition<UserType> condition = new Condition<UserType>();
+		
+		if(StringUtils.isNotBlank(search)){
+			condition.setSearch(search);
+		}
 		condition.setT(userType);
 		condition.setPage(page);
 		Condition<UserType> condition2 = userTypeService

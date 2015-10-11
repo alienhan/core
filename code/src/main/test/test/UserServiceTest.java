@@ -9,8 +9,6 @@
 -------------------------------------------------------------------------*/
 package test;
 
-import static org.junit.Assert.fail;
-
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +22,9 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jh.core.util.Condition;
+import com.jh.core.util.Page;
+import com.jh.dev.bo.Module;
 import com.jh.dev.bo.User;
 import com.jh.dev.service.UserService;
 
@@ -46,32 +47,47 @@ public class UserServiceTest {
 	@Autowired 
 	private UserService userService;
 
-	@Test
+	//@Test
 	public void testSave() {
 		User user = new User();
-		user.setUserName("jh");
-		user.setUserPwd("123");
+		user.setUserName("姜晗");
+		user.setUserPwd("123dd");
 		userService.save(user);
 	}
 
-	@Test
+	//@Test
 	public void testDelete() {
-
+		User user = new User();
+		user.setUserId(2);
+		userService.delete(user);
 	}
 
-	@Test
+	//@Test
 	public void testUpdate() {
-
+		User user = new User();
+		user.setUserId(1);
+		user.setUserTel("34567");
+		userService.update(user);
 	}
 
-	@Test
+	//@Test
 	public void testGet() {
-
+		//验证级联关联
+		logger.info("-----------" + userService.get(1).getUserType().getTypeName());
 	}
 
 	@Test
 	public void testFindByJPQLWithPage() {
-		fail("Not yet implemented");
+		User user = new User();
+		Page page = new Page();
+		Condition<User> condition = new Condition<User>();
+		condition.setT(user);
+		condition.setPage(page);
+		Condition<User> conditionParam = userService.findByJPQLWithPage(condition);
+		for (User u : conditionParam.getList()) {
+			logger.info("-------------UserId: " + u.getUserId() + " UserName: "
+					+ u.getUserName());
+		}
 	}
 
 }

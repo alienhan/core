@@ -20,7 +20,7 @@
 	<!-- 默认的注解映射的支持 -->
 	<mvc:annotation-driven />
 	<!-- 自定义注解映射的支持 -->
-	<!-- <bean
+	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="cacheSeconds" value="0" />
 		<property name="messageConverters">
@@ -35,12 +35,12 @@
 						</list>
 					</property>
 				</bean>
-				支持Jackson
+				<!-- 支持Jackson -->
 				<bean
 					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 			</list>
 		</property>
-	</bean> -->
+	</bean>
 
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />

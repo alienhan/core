@@ -72,8 +72,7 @@ public class User implements Serializable {
 	private UserType userType;
 
 	@Id
-	@GeneratedValue(generator = "uuid", strategy=GenerationType.AUTO)
-	@GenericGenerator(name = "uuid", strategy = "uuid")
+	@GeneratedValue()
 	@Column(name = "USER_ID", unique = true, nullable = false, insertable = true, updatable = true)
 	public Integer getUserId() {
 		return userId;

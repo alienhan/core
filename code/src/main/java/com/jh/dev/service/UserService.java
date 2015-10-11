@@ -38,6 +38,19 @@ public class UserService {
 	public User get(int id) {
 		return userDao.get(id);
 	}
+	
+	/** 
+	 * 查询提示
+	 *
+	 * @Title: searchReminder 
+	 * @Author: jianghan
+	 * @param condition
+	 * @return
+	 *    
+	 */
+	public Condition<User> searchReminder(Condition<User> condition){
+		return userDao.searchReminder(condition);
+	}
 
 	/**
 	 * 分页

@@ -9,18 +9,17 @@ $(document).ready(function() {
 	});
 
 	// 隐藏添加，更新页面
-	$(".btad, .btud, .btdd, .btgd").dialog({
+	$(" .btpd, .btdd").dialog({
 		autoOpen : false,
 		height : 300,
 		width : 450,
-		modal : true,
 		show : {
 			effect : "blind",
-			duration : 1000
+			duration : 600
 		},
 		hide : {
-			effect : "explode",
-			duration : 1000
+			effect : "blind",
+			duration : 600
 		},
 		buttons : {
 			'关 闭' : function() {
@@ -66,3 +65,22 @@ var ajaxSupport = function(url, data, callback) {
 	});
 
 };
+
+/**
+ * 将多维数组转化成一维数组
+ * 
+ * @param arr
+ * @returns
+ */
+function  multiToSingle(arr) {
+	var newarr=[];
+    for(var k in arr)
+    {
+      if( arr[k] instanceof Array) {
+          multiToSingle(arr[k]);
+      }else {
+          newarr.push(arr[k]);
+      }
+    }
+    return newarr;
+}

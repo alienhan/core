@@ -2,22 +2,22 @@
 
 /* 全局设置
 ----------------------------------*/
-html {
+* {
 	
 }
 
 body {
-	font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana",
-		"sans-serif";
-	font-size: 62.5%;
 	overflow: auto;
 	height: 100%;
 	padding: 0px;
 	margin: 0px;
+	font-family: "Open Sans",helvetica,arial,sans-serif;
+	font-size: 12px;
 }
 
 a {
-	text-decoration: none
+	text-decoration: none;
+	color: #626262;
 }
 
 ul li {
@@ -31,33 +31,46 @@ ul li {
 }
 
 .base_header_top {
-	background-color: #5F6E8D;
-	height: 50px;
+
 }
 
 .base_header_content {
-	
+	background-color: #5F6E8D;
+	background: -webkit-linear-gradient(#6C7D9D, #505E7A); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#6C7D9D, #505E7A); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#6C7D9D, #505E7A); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#6C7D9D, #505E7A); /* 标准的语法 */
+	height: 85px;
 }
 
 .base_header_content .base_logo {
-	
+	float: left;
 }
 
 .base_header_content .base_state {
-	
+	float: right;
+	margin: 21px 20px 0px 0px;
+}
+
+.base_header_content .base_state img {
+	height: 38px;
 }
 
 .base_header_bottom {
 	background-color: #EBF0F2;
-	height: 25px;
+	height: 30px;
+}
+
+.base_header_bottom .bhbu{
+	float: right;
+	margin: 7px 30px 0px 0px;
+	font-size: 13px;
+	color: #626262;
 }
 
 .base_main {
-	font-family: "Trebuchet MS", "Helvetica", "Arial", "Verdana",
-		"sans-serif";
-	font-size: 62.5%;
 	border: 0px solid;
-	min-height: 500px;
+	min-height: 490px;
 	margin: 0 auto;
 	padding: 0px;
 }
@@ -66,7 +79,7 @@ ul li {
 	border-right: 1px solid #CCCCCC;
 	float: left;
 	width: 17%;
-	min-height: 581px;
+	min-height: 541px;
 	float: left;
 	margin: 0px;
 	padding: 0px;
@@ -76,13 +89,12 @@ ul li {
 	border: 0px solid;
 	float: right;
 	width: 82.5%;
-	min-height: 500px;
 	padding: 0px;
 	margin: 0px;
 }
 
 .base_footer {
-	height: 81px;
+	height: 51px;
 	margin-left: 17%;
 	border-top: 1px solid #CCCCCC;
 }
@@ -92,11 +104,13 @@ ul li {
 /* base_table_div */
 .btd {
 	font-size: 12px;
+	margin: 0px 25px 0px 20px;
 }
 
 /* base_table_header */
 .bth {
 	margin: 0 auto;
+	margin-top: 20px;
 	width: 80%;
 	height: 30px;
 	padding: 5px;
@@ -164,9 +178,20 @@ ul li {
 .btf {
 	margin: 0 auto;
 	padding-top:10px;
+	height: 40px;
 	width: 80%;
 	text-align: right;
 	font-size: 14px;
+	position: relative;
+}
+
+.btf a {
+	margin-right: 5px;
+}
+
+.btf span {
+	color: #626262;
+	margin-left: 5px;
 }
 
 /* content 设置 
@@ -174,16 +199,26 @@ ul li {
 /* base_content_header */
 .bch {
 	border-bottom: 1px solid #EEEEEE;
-	height: 90px;
+	height: 100px;
 	padding:0px;
-	margin: 0px 15px 15px 10px;
+	margin: 0px 25px 0px 20px;
+	font-size: 15px;
 }
 
-/*  base_content_theme */
+/* base_content_theme */
 .bch .bct {
-	width: 150px;
-	font-size: 18px;
-	text-align: center;
-	padding: 10px 0px 0px 0px;
+	color: #626262;
+	padding: 25px 0px 0px 0px;
 	margin:0 auto;
+}
+
+.bch .bct2 {
+	margin: 20px 0px 0px 0px;
+	font-size: 10px;
+	color: gray;
+}
+
+/* content弹出层 */
+.base_pop .btad{
+
 }

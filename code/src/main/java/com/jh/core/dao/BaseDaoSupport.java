@@ -190,18 +190,19 @@ public class BaseDaoSupport {
 		int pageNo = condition.getPage().getPageNo();
 		int pageSize = condition.getPage().getPageSize();
 		String ql = condition.getQl();
-		
-		// 根据ql获取count语句
-        String countQL = "select count(*) ";
-        if (ql.toLowerCase().indexOf("order by") == -1) {
-            countQL += ql.substring(ql.toLowerCase().indexOf("from"));
-        } else {
-            countQL += ql.substring(ql.toLowerCase().indexOf("from"), ql.toLowerCase().indexOf("order by"));
-        }
-        condition.setQl(countQL);
-        int count = this.countByQl(em, condition, opt, params);
 
-        //查询语句为空
+		// 根据ql获取count语句
+		String countQL = "select count(*) ";
+		if (ql.toLowerCase().indexOf("order by") == -1) {
+			countQL += ql.substring(ql.toLowerCase().indexOf("from"));
+		} else {
+			countQL += ql.substring(ql.toLowerCase().indexOf("from"), ql
+					.toLowerCase().indexOf("order by"));
+		}
+		condition.setQl(countQL);
+		int count = this.countByQl(em, condition, opt, params);
+
+		// 查询语句为空
 		if (StringUtils.isBlank(condition.getQl())) {
 			Page page = Page.EMPTY_PAGE;
 			conditionParam.setPage(page);
@@ -227,6 +228,7 @@ public class BaseDaoSupport {
 			conditionParam.setList(list);
 			Page page = new Page(count, pageNo, pageSize);
 			conditionParam.setPage(page);
+			conditionParam.setSearch(condition.getSearch());
 
 			return conditionParam;
 		} catch (HibernateException ex) {
@@ -239,10 +241,13 @@ public class BaseDaoSupport {
 	 * 
 	 * @Title: countByQl
 	 * @Author: jianghan
-	 * @param condition 查询条件
+	 * @param condition
+	 *            查询条件
 	 * @param em
-	 * @param opt 查询类型
-	 * @param params 查询参数（可选）
+	 * @param opt
+	 *            查询类型
+	 * @param params
+	 *            查询参数（可选）
 	 * @return
 	 * 
 	 */
@@ -250,7 +255,11 @@ public class BaseDaoSupport {
 			int opt, Object... params) {
 		try {
 			Query query = this.create(em, condition.getQl(), opt, params);
-			return Integer.parseInt(query.getSingleResult().toString());
+			if (StringUtils.isNotBlank(query.getSingleResult().toString())) {
+				return Integer.parseInt(query.getSingleResult().toString());
+			} else {
+				return 0;
+			}
 
 		} catch (HibernateException ex) {
 			throw new DaoException(ex);

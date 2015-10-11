@@ -26,6 +26,8 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jh.core.util.Condition;
@@ -36,77 +38,79 @@ import com.jh.dev.service.ModuleService;
 
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
-//加载spring 配置文件
+// 加载spring 配置文件
 @ContextConfiguration(locations = { "classpath:spring-context.xml",
 		"classpath:spring-servlet.xml" })
-//加载事务管理类，可以省略
+// 加载事务管理类，可以省略
 @TransactionConfiguration(transactionManager = "txManager", defaultRollback = false)
-//测试执行的类
+// 测试执行的类
 @TestExecutionListeners(listeners = {
 		DependencyInjectionTestExecutionListener.class,
 		DirtiesContextTestExecutionListener.class,
 		TransactionalTestExecutionListener.class })
 public class ModuleServiceTest {
-	
+
 	private final Logger logger = Logger.getLogger(ModuleServiceTest.class);
 
 	@Resource
-	private  ModuleService moduleService;
-	
-	//@Test
+	private ModuleService moduleService;
+
+	// @Test
 	public void testSaveModule() {
 		Module module = new Module();
 		module.setModuleName("其他模板");
-		//module.setModuleTag(4);
+		// module.setModuleTag(4);
 		moduleService.saveModule(module);
-		
+
 	}
 
-	//@Test
+	// @Test
 	public void testDeleteModule() {
 		Module module = new Module();
 		module.setModuleId(25);
 		moduleService.deleteModule(module);
 	}
 
-	//@Test
+	// @Test
 	public void testUpdateModule() {
 		Module module = new Module();
 		module.setModuleId(23);
 		module.setModuleName("系统模板3");
 		module.setModuleTag(5);
-		//module.getMenuSet().clear();
-		//Menu menu = new Menu();
+		// module.getMenuSet().clear();
+		// Menu menu = new Menu();
 		Set<Menu> menuSet = new HashSet<Menu>();
 		module.setMenuSet(menuSet);
 		moduleService.updateModule(module);
 	}
 
-	//@Test
+	// @Test
 	public void testGetModule() {
 		Module module = moduleService.getModule(1);
 		logger.info("module name: " + module.getModuleName());
 	}
-	
-	//@Test
-	public void testFindUniqueModuleByJPQL(){
+
+	// @Test
+	public void testFindUniqueModuleByJPQL() {
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("moduleTag", 2);
 		Module module = moduleService.findUniqueModuleByJPQL(parameterMap);
 		logger.info("module name: " + module.getModuleName());
 	}
-	
+
 	@Test
-	public void testFindModuleByJPQLWithPage(){
+	public void testFindModuleByJPQLWithPage() {
 		Module module = new Module();
 		module.setModuleName("管理员模板");
 		Page page = new Page();
 		Condition<Module> condition = new Condition<Module>();
 		condition.setT(module);
 		condition.setPage(page);
-		Condition<Module> conditionParam = moduleService.findModuleByJPQLWithPage(condition);
-		for(Module m : conditionParam.getList()){
-			logger.info("moduleId: " + m.getModuleId() + " ModuleName: " + m.getModuleName());
+		Condition<Module> conditionParam = moduleService
+				.findModuleByJPQLWithPage(condition);
+		for (Module m : conditionParam.getList()) {
+			logger.info("moduleId: " + m.getModuleId() + " ModuleName: "
+					+ m.getModuleName());
 		}
 	}
 

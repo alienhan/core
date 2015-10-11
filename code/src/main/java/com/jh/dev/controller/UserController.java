@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jh.core.util.Condition;
 import com.jh.core.util.Page;
 import com.jh.dev.bo.User;
+import com.jh.dev.bo.UserType;
 import com.jh.dev.service.UserService;
 
 /**
@@ -71,6 +73,15 @@ public class UserController {
 		map.put("user", user2);
 		return map;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/search_reminder")
+	public Map<String, Object> searchReminder(@RequestBody final Condition<User> condition){
+		Map<String, Object> map = new HashMap<String, Object>();
+		Condition<User> condition2 =userService.searchReminder(condition);
+		map.put("search", condition2.getList());
+		return map;
+	}
 
 	/**
 	 * 分页查询
@@ -83,9 +94,13 @@ public class UserController {
 	 * @return
 	 * 
 	 */
-	@RequestMapping("/list_User")
-	public String list_module(User user, Page page, Model model) {
+	@RequestMapping("/list_user")
+	public String list_module(String search,User user, Page page, Model model) {
 		Condition<User> condition = new Condition<User>();
+		
+		if(StringUtils.isNotBlank(search)){
+			condition.setSearch(search);
+		}
 		condition.setT(user);
 		condition.setPage(page);
 		Condition<User> condition2 = userService.findByJPQLWithPage(condition);
