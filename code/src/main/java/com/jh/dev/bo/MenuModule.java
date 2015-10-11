@@ -25,9 +25,11 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.jh.core.constants.ConstantsDao;
+
 @Entity
-@Table(name = "module_tb")
-public class Module implements Serializable {
+@Table(name = ConstantsDao.dataBaseDev + "menu_module_tb")
+public class MenuModule implements Serializable {
 	/**
 	 * 
 	 */

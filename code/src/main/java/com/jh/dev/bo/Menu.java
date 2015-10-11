@@ -27,8 +27,10 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.jh.core.constants.ConstantsDao;
+
 @Entity
-@Table(name = "menu_tb")
+@Table(name = ConstantsDao.dataBaseDev + "menu_tb")
 public class Menu implements Serializable {
 	/**
 	 * 
@@ -69,7 +71,7 @@ public class Menu implements Serializable {
 	/**
 	 * 所属模块
 	 */
-	private Module module;
+	private MenuModule module;
 	/**
 	 * 菜单描述
 	 */
@@ -157,11 +159,11 @@ public class Menu implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "MODULE_ID", referencedColumnName = "MODULE_ID", insertable = false, updatable = false)
-	public Module getModule() {
+	public MenuModule getModule() {
 		return module;
 	}
 
-	public void setModule(Module module) {
+	public void setModule(MenuModule module) {
 		this.module = module;
 	}
 

@@ -27,17 +27,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jh.core.util.Condition;
 import com.jh.core.util.Page;
 import com.jh.dev.bo.Menu;
-import com.jh.dev.bo.Module;
-import com.jh.dev.service.ModuleService;
+import com.jh.dev.bo.MenuModule;
+import com.jh.dev.service.MenuModuleService;
 
 @Controller
 @RequestMapping("/module")
-public class ModuleController {
+public class MenuModuleController {
 
-	private final Logger logger = Logger.getLogger(ModuleController.class);
+	private final Logger logger = Logger.getLogger(MenuModuleController.class);
 
 	@Autowired
-	private ModuleService moduleService;
+	private MenuModuleService moduleService;
 
 	/**
 	 * 保存菜单所属模型
@@ -51,7 +51,7 @@ public class ModuleController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/save_module", method = RequestMethod.POST)
-	public Map<String, Object> save_module(@RequestBody final Module module,
+	public Map<String, Object> save_module(@RequestBody final MenuModule module,
 			Model model) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -75,7 +75,7 @@ public class ModuleController {
 
 	@RequestMapping("/delete_module")
 	public @ResponseBody
-	Map<String, Object> delete_module(@RequestBody final Module module,
+	Map<String, Object> delete_module(@RequestBody final MenuModule module,
 			Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		moduleService.deleteModule(module);
@@ -99,7 +99,7 @@ public class ModuleController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/update_module", method = RequestMethod.POST)
-	public Map<String, Object> update_module(@RequestBody final Module module,
+	public Map<String, Object> update_module(@RequestBody final MenuModule module,
 			Model model) throws IllegalAccessException,
 			InvocationTargetException {
 
@@ -128,9 +128,9 @@ public class ModuleController {
 	 */
 	@RequestMapping("/get_module")
 	public @ResponseBody
-	Map<String, Object> get_module(@RequestBody final Module module, Model model) {
+	Map<String, Object> get_module(@RequestBody final MenuModule module, Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		Module moduleParam = moduleService.getModule(module.getModuleId());
+		MenuModule moduleParam = moduleService.getModule(module.getModuleId());
 		map.put("module", moduleParam);
 		return map;
 	}
@@ -147,11 +147,11 @@ public class ModuleController {
 	 * 
 	 */
 	@RequestMapping("/list_module")
-	public String list_module(Module module, Page page, Model model) {
-		Condition<Module> condition = new Condition<Module>();
+	public String list_module(MenuModule module, Page page, Model model) {
+		Condition<MenuModule> condition = new Condition<MenuModule>();
 		condition.setT(module);
 		condition.setPage(page);
-		Condition<Module> conditionParam = moduleService
+		Condition<MenuModule> conditionParam = moduleService
 				.findModuleByJPQLWithPage(condition);
 		model.addAttribute("conditionParam", conditionParam);
 

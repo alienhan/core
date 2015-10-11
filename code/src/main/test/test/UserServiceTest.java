@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jh.core.util.Condition;
 import com.jh.core.util.Page;
-import com.jh.dev.bo.Module;
+import com.jh.dev.bo.MenuModule;
 import com.jh.dev.bo.User;
 import com.jh.dev.service.UserService;
 

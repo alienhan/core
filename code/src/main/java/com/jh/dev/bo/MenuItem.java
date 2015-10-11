@@ -23,8 +23,10 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.jh.core.constants.ConstantsDao;
+
 @Entity
-@Table(name = "menu_item_tb")
+@Table(name = ConstantsDao.dataBaseDev + "menu_item_tb")
 public class MenuItem implements Serializable{
 	/**
 	 * 

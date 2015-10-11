@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jh.core.util.Condition;
 import com.jh.dev.bo.Menu;
-import com.jh.dev.bo.Module;
+import com.jh.dev.bo.MenuModule;
 import com.jh.dev.bo.UserType;
 import com.jh.dev.service.MenuService;
 
@@ -39,7 +39,7 @@ public class MenuController {
 	public String save_menu(Menu menu, Model model) {
 		menu.setMenuId(null);
 		UserType userType = new UserType();
-		Module module = new Module();
+		MenuModule module = new MenuModule();
 		menu.setModule(module);
 		menu.setUserType(userType);
 		menuService.saveMenu(menu);

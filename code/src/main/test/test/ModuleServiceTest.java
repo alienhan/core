@@ -33,8 +33,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jh.core.util.Condition;
 import com.jh.core.util.Page;
 import com.jh.dev.bo.Menu;
-import com.jh.dev.bo.Module;
-import com.jh.dev.service.ModuleService;
+import com.jh.dev.bo.MenuModule;
+import com.jh.dev.service.MenuModuleService;
 
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -53,11 +53,11 @@ public class ModuleServiceTest {
 	private final Logger logger = Logger.getLogger(ModuleServiceTest.class);
 
 	@Resource
-	private ModuleService moduleService;
+	private MenuModuleService moduleService;
 
 	// @Test
 	public void testSaveModule() {
-		Module module = new Module();
+		MenuModule module = new MenuModule();
 		module.setModuleName("其他模板");
 		// module.setModuleTag(4);
 		moduleService.saveModule(module);
@@ -66,14 +66,14 @@ public class ModuleServiceTest {
 
 	// @Test
 	public void testDeleteModule() {
-		Module module = new Module();
+		MenuModule module = new MenuModule();
 		module.setModuleId(25);
 		moduleService.deleteModule(module);
 	}
 
 	// @Test
 	public void testUpdateModule() {
-		Module module = new Module();
+		MenuModule module = new MenuModule();
 		module.setModuleId(23);
 		module.setModuleName("系统模板3");
 		module.setModuleTag(5);
@@ -86,7 +86,7 @@ public class ModuleServiceTest {
 
 	// @Test
 	public void testGetModule() {
-		Module module = moduleService.getModule(1);
+		MenuModule module = moduleService.getModule(1);
 		logger.info("module name: " + module.getModuleName());
 	}
 
@@ -94,21 +94,21 @@ public class ModuleServiceTest {
 	public void testFindUniqueModuleByJPQL() {
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("moduleTag", 2);
-		Module module = moduleService.findUniqueModuleByJPQL(parameterMap);
+		MenuModule module = moduleService.findUniqueModuleByJPQL(parameterMap);
 		logger.info("module name: " + module.getModuleName());
 	}
 
 	@Test
 	public void testFindModuleByJPQLWithPage() {
-		Module module = new Module();
+		MenuModule module = new MenuModule();
 		module.setModuleName("管理员模板");
 		Page page = new Page();
-		Condition<Module> condition = new Condition<Module>();
+		Condition<MenuModule> condition = new Condition<MenuModule>();
 		condition.setT(module);
 		condition.setPage(page);
-		Condition<Module> conditionParam = moduleService
+		Condition<MenuModule> conditionParam = moduleService
 				.findModuleByJPQLWithPage(condition);
-		for (Module m : conditionParam.getList()) {
+		for (MenuModule m : conditionParam.getList()) {
 			logger.info("moduleId: " + m.getModuleId() + " ModuleName: "
 					+ m.getModuleName());
 		}

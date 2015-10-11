@@ -17,41 +17,41 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jh.core.util.Condition;
-import com.jh.dev.bo.Module;
-import com.jh.dev.dao.ModuleDao;
+import com.jh.dev.bo.MenuModule;
+import com.jh.dev.dao.MenuModuleDao;
 
 @Transactional
 @Service
-public class ModuleService {
+public class MenuModuleService {
 
 	@Autowired
-	private ModuleDao moduleDao;
+	private MenuModuleDao moduleDao;
 
-	public void saveModule(Module module) {
+	public void saveModule(MenuModule module) {
 		moduleDao.saveModule(module);
 	}
 
-	public void deleteModule(Module module) {
+	public void deleteModule(MenuModule module) {
 		moduleDao.deleteModule(module);
 	}
 
-	public void updateModule(Module module) {
+	public void updateModule(MenuModule module) {
 		moduleDao.updateModule(module);
 	}
 
-	public Module getModule(int id) {
+	public MenuModule getModule(int id) {
 		return moduleDao.getModule(id);
 	}
 	
-	public Module findUniqueModuleByJPQL(Map<String, Object> parameterMap){
+	public MenuModule findUniqueModuleByJPQL(Map<String, Object> parameterMap){
 		return moduleDao.findUniqueModuleByJPQL(parameterMap);
 	}
 	
-	public List<Module> findModuleByJPQL(Module module, Object... params){
+	public List<MenuModule> findModuleByJPQL(MenuModule module, Object... params){
 		return moduleDao.findModuleByJPQL(module, params);
 	}
 	
-	public Condition<Module> findModuleByJPQLWithPage(Condition<Module> condition){
+	public Condition<MenuModule> findModuleByJPQLWithPage(Condition<MenuModule> condition){
 		return moduleDao.findModuleByJPQLWithPage(condition);
 	}
 

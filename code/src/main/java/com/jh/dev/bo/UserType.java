@@ -25,8 +25,10 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.jh.core.constants.ConstantsDao;
+
 @Entity
-@Table(name = "user_type_tb")
+@Table(name = ConstantsDao.dataBaseDev + "user_type_tb")
 public class UserType implements Serializable {
 	/**
 	 * 

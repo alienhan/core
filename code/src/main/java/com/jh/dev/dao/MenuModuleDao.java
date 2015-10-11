@@ -18,10 +18,10 @@ import org.springframework.stereotype.Repository;
 
 import com.jh.core.dao.BaseDao;
 import com.jh.core.util.Condition;
-import com.jh.dev.bo.Module;
+import com.jh.dev.bo.MenuModule;
 
 @Repository
-public class ModuleDao extends BaseDao{
+public class MenuModuleDao extends BaseDao{
 	/** 
 	 * 保存菜单模型
 	 *
@@ -30,7 +30,7 @@ public class ModuleDao extends BaseDao{
 	 * @param module
 	 *    
 	 */
-	public void saveModule(Module module) {
+	public void saveModule(MenuModule module) {
 		super.save(module);
 	}
 	
@@ -42,7 +42,7 @@ public class ModuleDao extends BaseDao{
 	 * @param module
 	 *    
 	 */
-	public void deleteModule(Module module){
+	public void deleteModule(MenuModule module){
 		super.delete(module);
 	}
 	
@@ -54,7 +54,7 @@ public class ModuleDao extends BaseDao{
 	 * @param module
 	 *    
 	 */
-	public void updateModule(Module module){
+	public void updateModule(MenuModule module){
 		super.update(module);
 	}
 	
@@ -67,8 +67,8 @@ public class ModuleDao extends BaseDao{
 	 * @return
 	 *    
 	 */
-	public Module getModule(int id){
-		return super.get(Module.class, id);
+	public MenuModule getModule(int id){
+		return super.get(MenuModule.class, id);
 	}
 	
 	/** 
@@ -80,10 +80,10 @@ public class ModuleDao extends BaseDao{
 	 * @return
 	 *    
 	 */
-	public Module findUniqueModuleByJPQL(Map<String, Object> parameterMap){
-		StringBuffer jpql = new StringBuffer("select m from Module m where 1=1");
+	public MenuModule findUniqueModuleByJPQL(Map<String, Object> parameterMap){
+		StringBuffer jpql = new StringBuffer("select mm from MenuModule mm where 1=1");
 		if(StringUtils.isNotBlank(parameterMap.get("moduleTag").toString())){
-			jpql.append(" and m.moduleTag=:moduleTag");
+			jpql.append(" and mm.moduleTag=:moduleTag");
 		}
 		
 		return super.findUniqueByJPQL(jpql.toString(), parameterMap);
@@ -99,15 +99,15 @@ public class ModuleDao extends BaseDao{
 	 * @return
 	 *    
 	 */
-	public List<Module> findModuleByJPQL(Module module, Object... params){
-		StringBuffer jpql = new StringBuffer("select m from Module m where 1=1");
+	public List<MenuModule> findModuleByJPQL(MenuModule module, Object... params){
+		StringBuffer jpql = new StringBuffer("select mm from MenuModule mm where 1=1");
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		
 		if(StringUtils.isNotBlank(module.getModuleName())){
-			jpql.append(" and m.moduleName=:moduleName");
+			jpql.append(" and mm.moduleName=:moduleName");
 			parameterMap.put("moduleName", module.getModuleName());
 		}
-		jpql.append(" order by m.moduleId desc");
+		jpql.append(" order by mm.moduleId desc");
 		
 		return super.findByJPQL(jpql.toString(), params);
 	}
@@ -121,15 +121,15 @@ public class ModuleDao extends BaseDao{
 	 * @return
 	 *    
 	 */
-	public Condition<Module> findModuleByJPQLWithPage(Condition<Module> condition){
-		StringBuffer jpql = new StringBuffer("select m from Module m where 1=1");
+	public Condition<MenuModule> findModuleByJPQLWithPage(Condition<MenuModule> condition){
+		StringBuffer jpql = new StringBuffer("select mm from MenuModule mm where 1=1");
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		
 		if(StringUtils.isNotBlank(condition.getT().getModuleName())){
-			jpql.append(" and m.moduleName=:moduleName");
+			jpql.append(" and mm.moduleName=:moduleName");
 			parameterMap.put("moduleName", condition.getT().getModuleName());
 		}
-		jpql.append(" order by m.moduleId asc");
+		jpql.append(" order by mm.moduleId asc");
 		
 		condition.setQl(jpql.toString());
 		return super.findByJPQLWithPage(condition, parameterMap);

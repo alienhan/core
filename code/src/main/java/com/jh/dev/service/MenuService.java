@@ -15,9 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jh.core.util.Condition;
 import com.jh.dev.bo.Menu;
-import com.jh.dev.bo.Module;
+import com.jh.dev.bo.MenuModule;
 import com.jh.dev.dao.MenuDao;
-import com.jh.dev.dao.ModuleDao;
+import com.jh.dev.dao.MenuModuleDao;
 
 @Transactional
 @Service

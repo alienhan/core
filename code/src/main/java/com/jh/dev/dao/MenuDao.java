@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.jh.core.dao.BaseDao;
 import com.jh.core.util.Condition;
 import com.jh.dev.bo.Menu;
-import com.jh.dev.bo.Module;
+import com.jh.dev.bo.MenuModule;
 
 /** 
  * 菜单dao
